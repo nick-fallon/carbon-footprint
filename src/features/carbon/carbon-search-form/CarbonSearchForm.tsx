@@ -16,8 +16,6 @@ export const CarbonSearchForm = () => {
     useLazyGetCarbonQuery({});
   const [carbon, setCarbon] = useState({distance_unit: '', distance_value: '', carbon_kg: ''});
 
-  let displayValues = [];
-
   const handlePassengersChange = (event: React.FormEvent<HTMLInputElement>) => {
     const name = event.currentTarget.name;
     const value = event.currentTarget.value;
