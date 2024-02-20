@@ -2,7 +2,8 @@ import type React from "react";
 import { useState } from "react";
 import styles from "./CarbonSearchForm.module.css";
 import { useLazyGetCarbonQuery } from "../carbonApiSlice";
-import { IFlightsQuery } from "../types/flights.types";
+import type { IFlightsQuery } from "../types/flights.types";
+import { CarbonResults } from "../carbon-results/CarbonResults"
 
 export const CarbonSearchForm = () => {
   const [inputs, setInputs] = useState<IFlightsQuery>({
@@ -13,7 +14,9 @@ export const CarbonSearchForm = () => {
   // Using a query hook automatically fetches data and returns query values
   const [getCarbon, { data, isError, isLoading, isSuccess }] =
     useLazyGetCarbonQuery({});
-  const [carbon, setCarbon] = useState({distance_value: '', carbon_kg: ''})
+  const [carbon, setCarbon] = useState({distance_unit: '', distance_value: '', carbon_kg: ''});
+
+  let displayValues = [];
 
   const handlePassengersChange = (event: React.FormEvent<HTMLInputElement>) => {
     const name = event.currentTarget.name;
@@ -31,28 +34,15 @@ export const CarbonSearchForm = () => {
   };
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
-    const response: {distance_value: string; carbon_kg: string;} = {distance_value: '', carbon_kg: ''};
     event.preventDefault();
-    setCarbon((await getCarbon(inputs)).data.data.attributes.carbon_kg);
+    const response = await getCarbon(inputs);
+    setCarbon({
+      distance_unit: response.data.data.attributes.distance_unit,
+      distance_value: response.data.data.attributes.distance_value,
+      carbon_kg: response.data.data.attributes.carbon_kg
+    });
   };
 
-  // if (isError) {
-  //   return (
-  //     <div>
-  //       <h1>There was an error!!!</h1>
-  //     </div>
-  //   )
-  // }
-  //
-  // if (isLoading) {
-  //   return (
-  //     <div>
-  //       <h1>Loading...</h1>
-  //     </div>
-  //   )
-  // }
-
-  // if (isSuccess && data) {
   return (
     <>
       <h3 className="text-2xl">Flight:</h3>
@@ -101,12 +91,7 @@ export const CarbonSearchForm = () => {
           Submit
         </button>
       </form>
-      <div>
-        {/*<p>{carbon}</p>*/}
-      </div>
+      <CarbonResults results={carbon} isError={isError} isLoading={isLoading} isSuccess={isSuccess}/>
     </>
   );
-  // }
-
-  // return null;
 };
