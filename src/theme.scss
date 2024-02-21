@@ -1,0 +1,51 @@
+// Breakpoints
+
+// I Googled "common tablet breakpoint" to determine a good width
+// to use for our "mobile" vs "desktop" screen size breakpoints.
+$breakpoint-tablet: 768px;
+
+// Theme
+
+// I used a random palette from coolers.co to generate the colors.
+$licorice: #1c0f13;
+$ash-gray: #b0c0bc;
+$platinum: #e2e2e2;
+$dim-gray: #797270;
+$hunyadi-yellow: #edae49;
+
+// Step Base
+// Most sizes will be based on this Set Base value, ensuring they
+// remain consistent
+$baseStep: 8px;
+
+// These are some common spacers to keep item spacing consistent
+$spacer-small: $baseStep * .5;
+$spacer-medium: $baseStep;
+$spacer-large: $baseStep * 2;
+$spacer-x-large: $baseStep * 3;
+
+// Set themed elements here to have one, easy-to-update place where
+// you control the theme
+
+$default-border-radius: $baseStep;
+
+$default-font-family: // A base font family made up of system fonts
+        ui-sans-serif,
+        system-ui,
+        -system-ui,
+        -apple-system,
+        BlinkMacSystemFont,
+        Roboto, Helvetica, Arial,
+        sans-serif,
+        "Apple Color Emoji";
+
+$text-color-dark: #111;
+$text-color-light: #fefefe;
+
+$body-background-color: $ash-gray;
+
+$top-header-background-color: $dim-gray;
+$top-header-text-color: $hunyadi-yellow;
+
+$panel-background-color: white;
+$panel-box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;

@@ -1,13 +1,15 @@
-import "./App.css";
+import "./App.scss";
 import { Counter } from "./features/counter/Counter";
 import { Quotes } from "./features/quotes/Quotes";
 import logo from "./logo.svg";
-import { CarbonSearchForm } from "./features/carbon/carbon-search-form/CarbonSearchForm";
+import { CarbonSearchForm} from "./features/carbon/carbon-search-form/CarbonSearchForm"
 
 const App = () => {
   return (
     <>
-      <CarbonSearchForm />
+      <div className="App">
+        <CarbonSearchForm />
+      </div>
     </>
   );
   // return (
