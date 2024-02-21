@@ -1,6 +1,6 @@
 import type React from "react";
 import { useState } from "react";
-import styles from "./CarbonSearchForm.module.css";
+import styles from "./CarbonSearchForm.module.scss";
 import { useLazyGetCarbonQuery } from "../carbonApiSlice";
 import type { IFlightsQuery } from "../types/flights.types";
 import { CarbonResults } from "../carbon-results/CarbonResults"
@@ -43,53 +43,61 @@ export const CarbonSearchForm = () => {
 
   return (
     <>
-      <h3 className="text-2xl">Flight:</h3>
-      <form onSubmit={handleSubmit} className="flex flex-col">
-        <label htmlFor="passengers-input">
-          Number of Passengers:
-          <input
-            className="border-2 border-2 text-center"
-            type="number"
-            name="passengers"
-            id="passengers-input"
-            min={1}
-            value={inputs.passengers}
-            onChange={handlePassengersChange}
-          />
-        </label>
-        <label htmlFor="dep-airport">
-          Departure Airport Code:
-          <input
-            className="border-2 border-2 text-center"
-            type="text"
-            name="departure_airport"
-            id="dep-airport"
-            maxLength={3}
-            minLength={3}
-            required
-            value={inputs.legs[0]?.departure_airport}
-            onChange={handleAirportChange}
-          />
-        </label>
-        <label htmlFor="dest-airport">
-          Destination Airport Code:
-          <input
-            className="border-2 border-2 text-center"
-            type="text"
-            name="destination_airport"
-            id="dest-airport"
-            maxLength={3}
-            minLength={3}
-            required
-            value={inputs.legs[0]?.destination_airport}
-            onChange={handleAirportChange}
-          />
-        </label>
-        <button className="border-2 border-green-300 w-1/6" type="submit">
-          Submit
-        </button>
-      </form>
-      <CarbonResults results={carbon} isError={isError} isLoading={isLoading} isSuccess={isSuccess}/>
+      <section className="w-1/2 m-4 p-3 border border-licorice bg-platinum">
+        <h3 className="text-xl flex self-start font-bold">Flight:</h3>
+        <form onSubmit={handleSubmit} className="flex flex-col mb-1">
+          <label htmlFor="passengers-input" className="flex flex-row justify-between mb-1">
+            <span>
+              Number of Passengers:
+            </span>
+            <input
+              className="border border-licorice text-center w-1/4"
+              type="number"
+              name="passengers"
+              id="passengers-input"
+              min={1}
+              value={inputs.passengers}
+              onChange={handlePassengersChange}
+            />
+          </label>
+          <label htmlFor="dep-airport" className="flex flex-row justify-between">
+            <span>
+              Departure Airport Code:
+            </span>
+            <input
+              className="border border-licorice text-center w-1/4"
+              type="text"
+              name="departure_airport"
+              id="dep-airport"
+              maxLength={3}
+              minLength={3}
+              required
+              value={inputs.legs[0]?.departure_airport}
+              onChange={handleAirportChange}
+            />
+          </label>
+          <label htmlFor="dest-airport" className="flex flex-row justify-between mt-1">
+            <span>
+              Destination Airport Code:
+            </span>
+            <input
+              className="border border-licorice text-center w-1/4"
+              type="text"
+              name="destination_airport"
+              id="dest-airport"
+              maxLength={3}
+              minLength={3}
+              required
+              value={inputs.legs[0]?.destination_airport}
+              onChange={handleAirportChange}
+            />
+          </label>
+          <button className="border border-licorice bg-hunyadi-yellow w-1/6 self-end mt-3" type="submit">
+            Submit
+          </button>
+        </form>
+        <CarbonResults results={carbon} isError={isError} isLoading={isLoading} isSuccess={isSuccess} />
+      </section>
     </>
   );
 };
